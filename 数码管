@@ -1,0 +1,97 @@
+import time as ti
+import turtle as tu
+def Gap():  #间隙
+    tu.penup()
+    tu.fd(5)
+def timenow():  #获取当前时间
+    B=ti.localtime()
+    C=ti.strftime("%Y-%m=%d+%H*%M/%S&",B)
+    return C
+def drawline(line):  #绘制七段数码管其中一条线
+    Gap()
+    if line:
+        tu.pendown()
+    else:
+        tu.penup()
+    tu.fd(40)
+    Gap()
+    tu.left(90)
+def drawnum(num):    #绘制七条线  
+    if num in [2,3,4,5,6,8,9]:
+        drawline(True)
+    else:
+        drawline(False)
+    if num in [0,1,2,3,4,7,8,9]:
+        drawline(True)
+    else:
+        drawline(False)
+    if num in [0,2,3,5,6,7,8,9]:
+        drawline(True)
+    else:
+        drawline(False)
+    if num in [0,4,5,6,8,9]:
+        drawline(True)
+    else:
+        drawline(False)
+    tu.right(90)
+    if num in [0,2,6,8]:
+        drawline(True)
+    else:
+        drawline(False)
+    if num in [0,2,3,5,6,8,9]:
+        drawline(True)
+    else:
+        drawline(False)
+    if num in [0,1,3,4,5,6,7,8,9]:
+        drawline(True)
+    else:
+        drawline(False)
+    tu.left(180)
+    tu.fd(40)
+def date(a):   #获取年月日时分秒的时间
+    tu.pencolor("red")
+    for i in a:
+        if i=="-":
+            tu.write('年',font=("Arial", 18, "normal"))
+            tu.pencolor("green")
+            tu.fd(40)
+        elif i=="=":
+            tu.write('月',font=("Arial", 18, "normal"))
+            tu.pencolor("blue")
+            tu.fd(40)
+        elif i=="+":
+            tu.write('日',font=("Arial", 18, "normal"))
+            tu.pencolor("purple")
+            tu.fd(40)
+        elif i=="*":
+            tu.write('时',font=("Arial", 18, "normal"))
+            tu.pencolor("purple")
+            tu.fd(40)
+        elif i=="/":
+            tu.write('分',font=("Arial", 18, "normal"))
+            tu.pencolor("purple")
+            tu.fd(40)
+        elif i=="&":
+            tu.write('秒',font=("Arial", 18, "normal"))
+            tu.pencolor("purple")
+            tu.fd(40)
+        else:
+            drawnum(eval(i))
+def output():
+    tu.penup()
+    tu.bk(750)
+    tu.pensize(5)
+    tu.pendown()
+    nowtime=timenow()
+    date(nowtime)
+    tu.hideturtle()
+    
+
+tu.speed(10)
+tu.delay(0)
+tu.setup(1600,800,0,0)
+while 1>0:
+    output()
+    ti.sleep(1)
+    tu.clear()
+    tu.goto(0,0)
